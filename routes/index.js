@@ -138,7 +138,10 @@ router.get('/', function (req, res) {
                         this.emit('variable', 'url', this.getCurrentUrl());
                         break;
                     case 'count' :
-                        var count = this.getElementsInfo(xPath(element)).length;
+                        var count = 0;
+                        if(this.exists(xPath(element))) {
+                            count = this.getElementsInfo(xPath(element)).length;
+                        }
                         var name = commands[i].name ? commands[i].name : 'count';
                         this.emit('result', this.currentHTTPStatus, this.getCurrentUrl(), command, true, element, count);
                         this.emit('variable', name, count);
